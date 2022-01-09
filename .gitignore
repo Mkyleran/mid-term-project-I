@@ -1,2 +1,5 @@
 
 .ipynb_checkpoints
+data/database_credentials.txt
+.virtual_documents
+*.pyc
