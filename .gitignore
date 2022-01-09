@@ -1,3 +1,5 @@
 
 .ipynb_checkpoints
 data/database_credentials.txt
+.virtual_documents
+.cpython-310.pyc
