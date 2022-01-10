@@ -9,41 +9,33 @@ from psycopg2 import sql  # SQL string composition
 import pandas as pd
 
 # Project level modules
-import modules.sql_statements as sqs  # PostgreSQL statements
+from modules.database_credentials import credentials  # PostgreSQL database credentials
+from modules import sql_statements as sqs  # PostgreSQL statements
 
 
 # [psycopg2 documentation](https://www.psycopg.org/docs/)
 
-# Use database credentials from [Compass](https://data.compass.lighthouselabs.ca/days/w05d5/activities/823)
 
-
-def postgresql_connection():
+def postgresql_connection(db_credentials: 'str' = credentials):
     """
     Create a new database session
     
     Parameters:
     -----------
-    None
+    db_credentials : string
+        The credentials string format corresponds to psycopg2.connect()
+        parameter format.
+        Example: "dbname=test user=postgres password=secret"
         
     Returns:
     --------
     connection : (psycopg2 connection object)
         A PostgreSQL connection
-    
-    The format of database_credentials.txt corresponds to psycopg2.connect()
-    parameter format.
-        Example: "dbname=test user=postgres password=secret"
-    
-    Credentials are retrievable from Compass
-    (https://data.compass.lighthouselabs.ca/days/w05d5/activities/823)
     """
-    
-    # database_credentials.txt is in .gitignore
-    db_credentials = open('../data/database_credentials.txt', 'r').read()
     
     # Make connection to PostgreSQL database with credentials
     connection = psycopg2.connect(db_credentials)
-    
+    print('Connected')
     return connection
 
 
