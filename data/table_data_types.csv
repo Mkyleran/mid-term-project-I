@@ -1,0 +1,43 @@
+table_name,column_name,data_type,table_name,column_name,data_type,table_name,column_name,data_type,table_name,column_name,data_type
+flights,fl_date,text,flights_test,fl_date,timestamp without time zone,fuel_comsumption,month,bigint,passengers,departures_scheduled,double precision
+flights,mkt_unique_carrier,text,flights_test,mkt_unique_carrier,text,fuel_comsumption,airline_id,double precision,passengers,departures_performed,double precision
+flights,branded_code_share,text,flights_test,branded_code_share,text,fuel_comsumption,unique_carrier,text,passengers,payload,double precision
+flights,mkt_carrier,text,flights_test,mkt_carrier,text,fuel_comsumption,carrier,text,passengers,seats,double precision
+flights,mkt_carrier_fl_num,integer,flights_test,mkt_carrier_fl_num,bigint,fuel_comsumption,carrier_name,text,passengers,passengers,double precision
+flights,op_unique_carrier,text,flights_test,op_unique_carrier,text,fuel_comsumption,carrier_group_new,bigint,passengers,freight,double precision
+flights,tail_num,text,flights_test,tail_num,text,fuel_comsumption,sdomt_gallons,double precision,passengers,mail,double precision
+flights,op_carrier_fl_num,integer,flights_test,op_carrier_fl_num,bigint,fuel_comsumption,satl_gallons,double precision,passengers,distance,double precision
+flights,origin_airport_id,integer,flights_test,origin_airport_id,bigint,fuel_comsumption,spac_gallons,double precision,passengers,ramp_to_ramp,double precision
+flights,origin,text,flights_test,origin,text,fuel_comsumption,slat_gallons,double precision,passengers,air_time,double precision
+flights,origin_city_name,text,flights_test,origin_city_name,text,fuel_comsumption,sint_gallons,double precision,passengers,unique_carrier,text
+flights,dest_airport_id,integer,flights_test,dest_airport_id,bigint,fuel_comsumption,ts_gallons,double precision,passengers,airline_id,bigint
+flights,dest,text,flights_test,dest,text,fuel_comsumption,tdomt_gallons,double precision,passengers,unique_carrier_name,text
+flights,dest_city_name,text,flights_test,dest_city_name,text,fuel_comsumption,tint_gallons,double precision,passengers,region,text
+flights,crs_dep_time,integer,flights_test,crs_dep_time,bigint,fuel_comsumption,total_gallons,double precision,passengers,carrier,text
+flights,dep_time,double precision,flights_test,crs_arr_time,bigint,fuel_comsumption,sdomt_cost,double precision,passengers,carrier_name,text
+flights,dep_delay,double precision,flights_test,dup,text,fuel_comsumption,satl_cost,double precision,passengers,carrier_group,bigint
+flights,taxi_out,double precision,flights_test,crs_elapsed_time,bigint,fuel_comsumption,spac_cost,double precision,passengers,carrier_group_new,bigint
+flights,wheels_off,double precision,flights_test,flights,bigint,fuel_comsumption,slat_cost,double precision,passengers,origin_airport_id,bigint
+flights,wheels_on,double precision,flights_test,distance,bigint,fuel_comsumption,sint_cost,double precision,passengers,origin_city_market_id,bigint
+flights,taxi_in,double precision,,,,fuel_comsumption,ts_cost,double precision,passengers,origin,text
+flights,crs_arr_time,integer,,,,fuel_comsumption,tdomt_cost,double precision,passengers,origin_city_name,text
+flights,arr_time,double precision,,,,fuel_comsumption,tint_cost,double precision,passengers,origin_country,text
+flights,arr_delay,double precision,,,,fuel_comsumption,total_cost,double precision,passengers,origin_country_name,text
+flights,cancelled,double precision,,,,fuel_comsumption,year,bigint,passengers,dest_airport_id,bigint
+flights,cancellation_code,text,,,,,,,passengers,dest_city_market_id,bigint
+flights,diverted,double precision,,,,,,,passengers,dest,text
+flights,dup,text,,,,,,,passengers,dest_city_name,text
+flights,crs_elapsed_time,double precision,,,,,,,passengers,dest_country,text
+flights,actual_elapsed_time,double precision,,,,,,,passengers,dest_country_name,text
+flights,air_time,double precision,,,,,,,passengers,aircraft_group,bigint
+flights,flights,double precision,,,,,,,passengers,aircraft_type,bigint
+flights,distance,double precision,,,,,,,passengers,aircraft_config,bigint
+flights,carrier_delay,double precision,,,,,,,passengers,year,bigint
+flights,weather_delay,double precision,,,,,,,passengers,month,bigint
+flights,nas_delay,double precision,,,,,,,passengers,distance_group,bigint
+flights,security_delay,double precision,,,,,,,passengers,class,text
+flights,late_aircraft_delay,double precision,,,,,,,passengers,data_source,text
+flights,first_dep_time,text,,,,,,,,,
+flights,total_add_gtime,double precision,,,,,,,,,
+flights,longest_add_gtime,double precision,,,,,,,,,
+flights,no_name,double precision,,,,,,,,,
