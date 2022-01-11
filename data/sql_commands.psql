@@ -1,9 +1,10 @@
- SELECT *
- FROM flights
- LIMIT 10;
+--  SELECT *
+--  FROM flights
+--  LIMIT 10;
  
  
  SELECT
+  SUM(CASE WHEN arr_delay IS NULL THEN 1 ELSE 0 END) as null_count,
   COUNT(arr_delay) AS count,
   AVG(arr_delay) AS mean,
   STDDEV(arr_delay) AS standard_deviation,
@@ -13,5 +14,6 @@
   PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY arr_delay) AS median,
   PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY arr_delay) AS q3,
   MAX(arr_delay) AS max
-   FROM flights
-  LIMIT 10;
+   FROM (SELECT *
+        FROM flights
+        LIMIT 1000) as t;
