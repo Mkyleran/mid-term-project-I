@@ -1,0 +1,17 @@
+ SELECT *
+ FROM flights
+ LIMIT 10;
+ 
+ 
+ SELECT
+  COUNT(arr_delay) AS count,
+  AVG(arr_delay) AS mean,
+  STDDEV(arr_delay) AS standard_deviation,
+  VARIANCE(arr_delay) AS variance,
+  MIN(arr_delay) AS min,
+  PERCENTILE_CONT(0.25) WITHIN GROUP (ORDER BY arr_delay) AS q1,
+  PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY arr_delay) AS median,
+  PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY arr_delay) AS q3,
+  MAX(arr_delay) AS max
+   FROM flights
+  LIMIT 10;
