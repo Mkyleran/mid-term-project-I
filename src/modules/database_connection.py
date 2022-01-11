@@ -170,7 +170,7 @@ def execute_sql_statement(connection,
     
     # If True and a file path is provided save the dataframe to csv
     if (save_to_csv) & (csv_path != None):
-        dataframe_to_csv(df=df, path=csv_path)
+        dataframe_to_csv(df=df, csv_path=csv_path)
     
     return df
 
@@ -195,6 +195,7 @@ def get_table_data_types(connection, table_name: str):
     # Properly formated SQL statement that prevents SQL injection
     query = """
     SELECT
+       table_name,
        column_name,
        data_type
     FROM 
@@ -213,7 +214,6 @@ def get_table_data_types(connection, table_name: str):
     
     # Store query results in Pandas Dataframe
     df = pd.DataFrame(rows, columns=column_names)
-    df.columns.name = table_name  # Set dataframe name
     
     return df
 
