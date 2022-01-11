@@ -46,5 +46,10 @@ if __name__ == '__main__':
     locations_file_path = '<THE LOCATIONS FILE PATH GOES HERE>'
     year = <THE YEAR FOR THE DATA YOU WANT TO RECEIVE>
 
-    locations = pd.read_csv(locations_file_path).to_list()
-    build_weather_table(locations=locations, year=year, output_doc_name=f'historical_daily_weather_data_{year}.csv', API_key=API_key)
+    locations_df = pd.read_csv(locations_file_path)
+    locations_df = locations_df.drop('Unnamed: 0', axis =1)
+    locations_list = []
+    for i in range(locations_df.shape[0]):
+        locations_list.append({'city': locations_df.loc[i, 'city'], 'state': locations_df.loc[i, 'state']})
+
+    build_weather_table(locations=locations_list, year=year, output_doc_name=f'historical_daily_weather_data_{year}.csv', API_key=API_key)
