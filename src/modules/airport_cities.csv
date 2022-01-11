@@ -1,0 +1,369 @@
+,state,city
+0,SD,Aberdeen
+1,TX,Abilene
+2,AK,Adak Island
+3,PR,Aguadilla
+4,OH,Akron
+5,GA,Albany
+6,NY,Albany
+7,NM,Albuquerque
+8,LA,Alexandria
+9,MI,Alpena
+10,TX,Amarillo
+11,AK,Anchorage
+12,WI,Appleton
+13,NC,Asheville
+14,WV,Ashland
+15,CO,Aspen
+16,GA,Atlanta
+17,NJ,Atlantic City
+18,GA,Augusta
+19,TX,Austin
+20,CA,Bakersfield
+21,MD,Baltimore
+22,ME,Bangor
+23,AK,Barrow
+24,LA,Baton Rouge
+25,IL,Belleville
+26,WA,Bellingham
+27,MN,Bemidji
+28,AK,Bethel
+29,MT,Billings
+30,NY,Binghamton
+31,AL,Birmingham
+32,ID,Boise
+33,MA,Boston
+34,MT,Bozeman
+35,MN,Brainerd
+36,MO,Branson
+37,TX,Brownsville
+38,GA,Brunswick
+39,NY,Buffalo
+40,AZ,Bullhead City
+41,CA,Burbank
+42,VT,Burlington
+43,MT,Butte
+44,MO,Cape Girardeau
+45,WY,Casper
+46,UT,Cedar City
+47,SC,Charleston
+48,VI,Charlotte Amalie
+49,NC,Charlotte
+50,VA,Charlottesville
+51,TN,Chattanooga
+52,WY,Cheyenne
+53,IL,Chicago
+54,VI,Christiansted
+55,OH,Cincinnati
+56,OH,Cleveland
+57,WY,Cody
+58,CO,Colorado Springs
+59,MO,Columbia
+60,SC,Columbia
+61,GA,Columbus
+62,MS,Columbus
+63,OH,Columbus
+64,NC,Concord
+65,AK,Cordova
+66,TX,Corpus Christi
+67,TX,Dallas
+68,FL,Daytona Beach
+69,OH,Dayton
+70,AK,Deadhorse
+71,TX,Del Rio
+72,CO,Denver
+73,IA,Des Moines
+74,MI,Detroit
+75,ND,Devils Lake
+76,ND,Dickinson
+77,AK,Dillingham
+78,AL,Dothan
+79,IA,Dubuque
+80,MN,Duluth
+81,CO,Durango
+82,CO,Eagle
+83,WI,Eau Claire
+84,NV,Elko
+85,TX,El Paso
+86,PA,Erie
+87,MI,Escanaba
+88,OR,Eugene
+89,IN,Evansville
+90,WA,Everett
+91,AK,Fairbanks
+92,ND,Fargo
+93,AR,Fayetteville
+94,NC,Fayetteville
+95,AZ,Flagstaff
+96,MI,Flint
+97,SC,Florence
+98,FL,Fort Lauderdale
+99,FL,Fort Myers
+100,AR,Fort Smith
+101,IN,Fort Wayne
+102,CA,Fresno
+103,FL,Gainesville
+104,KS,Garden City
+105,WY,Gillette
+106,ND,Grand Forks
+107,NE,Grand Island
+108,CO,Grand Junction
+109,MI,Grand Rapids
+110,MT,Great Falls
+111,WI,Green Bay
+112,NC,Greenville
+113,SC,Greer
+114,TT,Guam
+115,CO,Gunnison
+116,AK,Gustavus
+117,MD,Hagerstown
+118,PA,Harrisburg
+119,CT,Hartford
+120,CO,Hayden
+121,KS,Hays
+122,MT,Helena
+123,MN,Hibbing
+124,HI,Hilo
+125,SC,Hilton Head
+126,NM,Hobbs
+127,HI,Honolulu
+128,HI,Hoolehua
+129,TX,Houston
+130,AL,Huntsville
+131,MA,Hyannis
+132,ID,Idaho Falls
+133,IN,Indianapolis
+134,MN,International Falls
+135,NY,Islip
+136,FL,Jacksonville
+137,WY,Jackson
+138,ND,Jamestown
+139,MO,Joplin
+140,AK,Juneau
+141,HI,Kahului
+142,MI,Kalamazoo
+143,MT,Kalispell
+144,MO,Kansas City
+145,HI,Kapalua
+146,NE,Kearney
+147,AK,Ketchikan
+148,FL,Key West
+149,TX,Killeen
+150,AK,King Salmon
+151,TN,Knoxville
+152,AK,Kodiak
+153,HI,Kona
+154,AK,Kotzebue
+155,WI,La Crosse
+156,LA,Lafayette
+157,LA,Lake Charles
+158,HI,Lanai
+159,MI,Lansing
+160,WY,Laramie
+161,TX,Laredo
+162,NV,Las Vegas
+163,PA,Latrobe
+164,WV,Lewisburg
+165,ID,Lewiston
+166,KY,Lexington
+167,KS,Liberal
+168,HI,Lihue
+169,NE,Lincoln
+170,AR,Little Rock
+171,CA,Long Beach
+172,TX,Longview
+173,CA,Los Angeles
+174,KY,Louisville
+175,TX,Lubbock
+176,VA,Lynchburg
+177,WI,Madison
+178,CA,Mammoth Lakes
+179,NH,Manchester
+180,MI,Marquette
+181,MA,Martha's Vineyard
+182,OR,Medford
+183,FL,Melbourne
+184,TN,Memphis
+185,MS,Meridian
+186,FL,Miami
+187,WI,Milwaukee
+188,MN,Minneapolis
+189,ND,Minot
+190,MT,Missoula
+191,UT,Moab
+192,AL,Mobile
+193,IL,Moline
+194,LA,Monroe
+195,CA,Monterey
+196,AL,Montgomery
+197,WI,Mosinee
+198,MI,Muskegon
+199,SC,Myrtle Beach
+200,MA,Nantucket
+201,TN,Nashville
+202,NJ,Newark
+203,CT,New Haven
+204,LA,New Orleans
+205,NY,New York
+206,NY,Niagara Falls
+207,AK,Nome
+208,VA,Norfolk
+209,NE,North Platte
+210,CA,Oakland
+211,NY,Ogdensburg
+212,UT,Ogden
+213,OK,Oklahoma City
+214,NE,Omaha
+215,CA,Ontario
+216,FL,Orlando
+217,KY,Owensboro
+218,KY,Paducah
+219,TT,Pago Pago
+220,CA,Palm Springs
+221,FL,Panama City
+222,MI,Pellston
+223,FL,Pensacola
+224,IL,Peoria
+225,AK,Petersburg
+226,PA,Philadelphia
+227,AZ,Phoenix
+228,SD,Pierre
+229,PA,Pittsburgh
+230,NY,Plattsburgh
+231,ID,Pocatello
+232,PR,Ponce
+233,ME,Portland
+234,OR,Portland
+235,NH,Portsmouth
+236,AZ,Prescott
+237,RI,Providence
+238,UT,Provo
+239,CO,Pueblo
+240,WA,Pullman
+241,FL,Punta Gorda
+242,IL,Quincy
+243,SD,Rapid City
+244,CA,Redding
+245,NV,Reno
+246,WI,Rhinelander
+247,VA,Richmond
+248,VA,Roanoke
+249,MN,Rochester
+250,NY,Rochester
+251,IL,Rockford
+252,WY,Rock Springs
+253,NM,Roswell
+254,TT,Rota
+255,CA,Sacramento
+256,TT,Saipan
+257,KS,Salina
+258,MD,Salisbury
+259,UT,Salt Lake City
+260,TX,San Angelo
+261,TX,San Antonio
+262,CA,San Diego
+263,FL,Sanford
+264,CA,San Francisco
+265,CA,San Jose
+266,PR,San Juan
+267,CA,San Luis Obispo
+268,CA,Santa Ana
+269,CA,Santa Barbara
+270,NM,Santa Fe
+271,CA,Santa Maria
+272,CA,Santa Rosa
+273,MI,Sault Ste. Marie
+274,GA,Savannah
+275,NE,Scottsbluff
+276,WA,Seattle
+277,LA,Shreveport
+278,IA,Sioux City
+279,SD,Sioux Falls
+280,AK,Sitka
+281,IN,South Bend
+282,WA,Spokane
+283,IL,Springfield
+284,MO,Springfield
+285,PA,State College
+286,VA,Staunton
+287,MN,St. Cloud
+288,UT,St. George
+289,OK,Stillwater
+290,MO,St. Louis
+291,CA,Stockton
+292,FL,St. Petersburg
+293,NY,Syracuse
+294,FL,Tallahassee
+295,FL,Tampa
+296,AR,Texarkana
+297,OH,Toledo
+298,MI,Traverse City
+299,NJ,Trenton
+300,AZ,Tucson
+301,OK,Tulsa
+302,ID,Twin Falls
+303,TX,Tyler
+304,AK,Unalaska
+305,GA,Valdosta
+306,FL,Valparaiso
+307,UT,Vernal
+308,TX,Waco
+309,WA,Walla Walla
+310,DC,Washington
+311,IA,Waterloo
+312,NY,Watertown
+313,SD,Watertown
+314,WA,Wenatchee
+315,MT,West Yellowstone
+316,NY,White Plains
+317,TX,Wichita Falls
+318,KS,Wichita
+319,PA,Williamsport
+320,ND,Williston
+321,NC,Wilmington
+322,MA,Worcester
+323,AK,Wrangell
+324,WA,Yakima
+325,AK,Yakutat
+326,AZ,Yuma
+327,PA,Allentown
+328,CA,Arcata
+329,TX,Beaumont
+330,OR,Bend
+331,ND,Bismarck
+332,IL,Bloomington
+333,TN,Bristol
+334,IA,Cedar
+335,IL,Champaign
+336,WV,Charleston
+337,WV,Clarksburg
+338,TX,College
+339,TX,Dallas
+340,NY,Elmira
+341,NC,Greensboro
+342,MS,Gulfport
+343,MI,Hancock
+344,TX,Harlingen
+345,MS,Hattiesburg
+346,MI,Iron
+347,NY,Ithaca
+348,MS,Jackson
+349,NC,Jacksonville
+350,OK,Lawton
+351,KS,Manhattan
+352,TX,Midland
+353,TX,Mission
+354,CO,Montrose
+355,NC,New
+356,NY,Newburgh
+357,VA,Newport
+358,OR,North
+359,WA,Pasco
+360,ME,Presque
+361,NC,Raleigh
+362,MI,Saginaw
+363,FL,Sarasota
+364,PA,Scranton
+365,ID,Sun
+366,FL,West
+367,OH,Youngstown
