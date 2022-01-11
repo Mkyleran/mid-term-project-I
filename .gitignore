@@ -1,5 +1,6 @@
 
 .ipynb_checkpoints
-data/database_credentials.txt
+src/modules/database_credentials.py
 .virtual_documents
 *.pyc
+.DS_Store

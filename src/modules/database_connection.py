@@ -9,41 +9,33 @@ from psycopg2 import sql  # SQL string composition
 import pandas as pd
 
 # Project level modules
-import modules.sql_statements as sqs  # PostgreSQL statements
+from modules.database_credentials import credentials  # PostgreSQL database credentials
+from modules import sql_statements as sqs  # PostgreSQL statements
 
 
 # [psycopg2 documentation](https://www.psycopg.org/docs/)
 
-# Use database credentials from [Compass](https://data.compass.lighthouselabs.ca/days/w05d5/activities/823)
 
-
-def postgresql_connection():
+def postgresql_connection(db_credentials: 'str' = credentials):
     """
     Create a new database session
     
     Parameters:
     -----------
-    None
+    db_credentials : string
+        The credentials string format corresponds to psycopg2.connect()
+        parameter format.
+        Example: "dbname=test user=postgres password=secret"
         
     Returns:
     --------
     connection : (psycopg2 connection object)
         A PostgreSQL connection
-    
-    The format of database_credentials.txt corresponds to psycopg2.connect()
-    parameter format.
-        Example: "dbname=test user=postgres password=secret"
-    
-    Credentials are retrievable from Compass
-    (https://data.compass.lighthouselabs.ca/days/w05d5/activities/823)
     """
-    
-    # database_credentials.txt is in .gitignore
-    db_credentials = open('../data/database_credentials.txt', 'r').read()
     
     # Make connection to PostgreSQL database with credentials
     connection = psycopg2.connect(db_credentials)
-    
+    print('Connected')
     return connection
 
 
@@ -178,7 +170,7 @@ def execute_sql_statement(connection,
     
     # If True and a file path is provided save the dataframe to csv
     if (save_to_csv) & (csv_path != None):
-        dataframe_to_csv(df=df, path=csv_path)
+        dataframe_to_csv(df=df, csv_path=csv_path)
     
     return df
 
@@ -203,6 +195,7 @@ def get_table_data_types(connection, table_name: str):
     # Properly formated SQL statement that prevents SQL injection
     query = """
     SELECT
+       table_name,
        column_name,
        data_type
     FROM 
@@ -221,7 +214,6 @@ def get_table_data_types(connection, table_name: str):
     
     # Store query results in Pandas Dataframe
     df = pd.DataFrame(rows, columns=column_names)
-    df.columns.name = table_name  # Set dataframe name
     
     return df
 

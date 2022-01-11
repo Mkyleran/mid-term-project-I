@@ -111,5 +111,29 @@ SELECT
       ORDER BY frequency DESC
 """
 
+num_stats_sql = """
+ SELECT
+  COUNT({feat}) AS count,
+  AVG({feat}) AS mean,
+  STDDEV({feat}) AS standard_deviation,
+  VARIANCE({feat}) AS variance,
+  MIN({feat}) AS min,
+  PERCENTILE_CONT(0.25) WITHIN GROUP (ORDER BY {feat}) AS q1,
+  PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY {feat}) AS median,
+  PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY {feat}) AS q3,
+  MAX({feat}) AS max
+   FROM {table}
+  LIMIT 10;
+"""
+
+cat_stats_sql = """
+SELECT 
+ {feature},
+ COUNT({feature}) AS frequency
+FROM {table}
+GROUP BY {feature}
+ORDER BY frequency DESC
+"""
+
 if __name__ == '__main__':
     pass
