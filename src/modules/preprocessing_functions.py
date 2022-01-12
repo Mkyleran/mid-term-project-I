@@ -166,33 +166,33 @@ def datetime_binning(df, bin_set = {}):
         df['day_of_year'] = 0
         for i in range(df.shape[0]):
             try:
-                data.loc[i, 'day_of_year'] = pd.to_datetime(data.loc[i, 'fl_date'], utc=True, unit='ms').day_of_year
+                df.loc[i, 'day_of_year'] = pd.to_datetime(data.loc[i, 'fl_date'], utc=True, unit='ms').day_of_year
             except ValueError:
-                data.loc[i, 'day_of_year'] = pd.to_datetime(data.loc[i, 'fl_date']).day_of_year
+                df.loc[i, 'day_of_year'] = pd.to_datetime(data.loc[i, 'fl_date']).day_of_year
                 
     if 'wd' in bin_set:
         df['weekday'] = 0
         for i in range(df.shape[0]):
             try:
-                data.loc[i, 'weekday'] = pd.to_datetime(data.loc[i, 'fl_date'], utc=True, unit='ms').day_of_week
+                df.loc[i, 'weekday'] = pd.to_datetime(data.loc[i, 'fl_date'], utc=True, unit='ms').day_of_week
             except ValueError:
-                data.loc[i, 'weekday'] = pd.to_datetime(data.loc[i, 'fl_date']).day_of_week
+                df.loc[i, 'weekday'] = pd.to_datetime(data.loc[i, 'fl_date']).day_of_week
     
     if 'w' in bin_set:
         df['week_of_year'] = 0
         for i in range(df.shape[0]):
             try:
-                data.loc[i, 'week_of_year'] = pd.to_datetime(data.loc[i, 'fl_date'], utc=True, unit='ms').weekofyear
+                df.loc[i, 'week_of_year'] = pd.to_datetime(data.loc[i, 'fl_date'], utc=True, unit='ms').weekofyear
             except ValueError:
-                data.loc[i, 'week_of_year'] = pd.to_datetime(data.loc[i, 'fl_date']).weekofyear
+                df.loc[i, 'week_of_year'] = pd.to_datetime(data.loc[i, 'fl_date']).weekofyear
     
     if 'm' in bin_set:
         df['month'] = 0
         for i in range(df.shape[0]):
             try:
-                data.loc[i, 'month'] = pd.to_datetime(data.loc[i, 'fl_date'], utc=True, unit='ms').month
+                df.loc[i, 'month'] = pd.to_datetime(data.loc[i, 'fl_date'], utc=True, unit='ms').month
             except ValueError:
-                data.loc[i, 'month'] = pd.to_datetime(data.loc[i, 'fl_date']).month
+                df.loc[i, 'month'] = pd.to_datetime(data.loc[i, 'fl_date']).month
         
     return df
 
