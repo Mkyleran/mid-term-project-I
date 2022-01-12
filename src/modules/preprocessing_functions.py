@@ -161,42 +161,36 @@ def datetime_binning(df, bin_set = {}):
     df.reset_index(drop = True, inplace = True)
     
     if not set(bin_set).issubset({'h', 'd', 'wd', 'w', 'm'}):
-        raise ValueError("bin_set must be any of 'd', 'w', or 'm'")
-        
-    if 'h' in bin_set:
-        df['dep_hour'] = df['crs_dep_time']//100       
+        raise ValueError("bin_set must be any of 'd', 'wd', 'w', or 'm'")
     
+    if 'h' in bin_set:
+        df['dep_hour'] = df['crs_dep_time']//100
     if 'd' in bin_set:
         df['day_of_year'] = 0
-        for i in range(df.shape[0]):
-            try:
-                df.loc[i, 'day_of_year'] = pd.to_datetime(df.loc[i, 'fl_date'], utc=True, unit='ms').day_of_year
-            except ValueError:
-                df.loc[i, 'day_of_year'] = pd.to_datetime(df.loc[i, 'fl_date']).day_of_year
-                
     if 'wd' in bin_set:
-        df['weekday'] = 0
-        for i in range(df.shape[0]):
-            try:
-                df.loc[i, 'weekday'] = pd.to_datetime(df.loc[i, 'fl_date'], utc=True, unit='ms').day_of_week
-            except ValueError:
-                df.loc[i, 'weekday'] = pd.to_datetime(df.loc[i, 'fl_date']).day_of_week
-    
+        df['weekday'] = 0    
     if 'w' in bin_set:
-        df['week_of_year'] = 0
-        for i in range(df.shape[0]):
-            try:
-                df.loc[i, 'week_of_year'] = pd.to_datetime(df.loc[i, 'fl_date'], utc=True, unit='ms').weekofyear
-            except ValueError:
-                df.loc[i, 'week_of_year'] = pd.to_datetime(df.loc[i, 'fl_date']).weekofyear
-    
+        df['week'] = 0
     if 'm' in bin_set:
         df['month'] = 0
-        for i in range(df.shape[0]):
-            try:
-                df.loc[i, 'month'] = pd.to_datetime(df.loc[i, 'fl_date'], utc=True, unit='ms').month
-            except ValueError:
-                df.loc[i, 'month'] = pd.to_datetime(df.loc[i, 'fl_date']).month
+    
+    for i in range(df.shape[0]):
+        try:
+            date_code = pd.to_datetime(df.loc[i, 'fl_date'], utc=True, unit='ms')
+        except ValueError:
+            date_code = pd.to_datetime(df.loc[i, 'fl_date'])   
+    
+        if 'd' in bin_set:
+            df.loc[i, 'day_of_year'] = date_code.day_of_year
+            
+        if 'wd' in bin_set:
+            df.loc[i, 'weekday'] = date_code.day_of_week
+
+        if 'w' in bin_set:
+            df.loc[i, 'week_of_year'] = date_code.weekofyear
+
+        if 'm' in bin_set:
+            df.loc[i, 'month'] = date_code.month
         
     return df
 
