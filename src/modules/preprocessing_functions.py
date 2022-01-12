@@ -100,7 +100,7 @@ def purge_features(df):
         'flights'
     ]
     
-    return df.drop(columns_to_remove, axis = 1)
+    return df.drop(columns=features_to_remove, axis = 1)
 
 
 def process_nan_values(df, features_to_zero = [], features_to_remove = [], features_to_mean = [], features_to_median = [], avg_before_purge = True):
@@ -323,3 +323,40 @@ def numerical_categorical_split(df):
     df_numerical = df[df_numerical_features_list]
     
     return df_numerical, df_categorical
+
+
+# Function for getting information binomial probabilities at a certain threshold. Can be used in Data cleaning to make judgements about what data to eliminate (e.g. See the percentages, by carrier, of flights with delays over 120 mins)
+
+def binomial_stats(df, col_list, threshold=0, greater=True):
+    '''Returns the bionomial distribution of a categorical feature that can be aggregated and the desired frequency proportions.
+        Parameters:
+            a (Pandas Data Frame) df - Date frame.
+            b (float or int) threshold (default = 0) - Numeric value to determine true or false cut-off threshold.
+            c (boolean) greater (default = True) - Boolean to determine if the comparison operator is greater than or less than.
+        Returns:
+            New Pandas Data Frame
+    '''
+    if len(col_list) != 2:
+            raise Exception("'Error. The columns list must only contain two column names: grouping feature and frequency feature.")
+            
+    stats = df[col_list]
+    group = col_list[0]
+    col_filt = col_list[1]
+    col_1 = col_filt + "_" + "yes"
+    col_2 = col_filt + "_" + "no"
+    if greater == True:
+
+        filt = stats.apply(lambda x : True
+            if x[col_filt] > threshold else False, axis = 1)
+    else:
+        filt = stats.apply(lambda x : True
+            if x[col_filt] < threshold else False, axis = 1)
+        
+
+    yes = stats[filt].groupby(group).count()
+    total = stats.groupby(group).count()
+    stats = yes/total     
+    stats[col_2] = (1- yes/total)
+    stats.rename({col_filt: col_1}, axis=1, inplace=True)
+    
+    return stats.reset_index()
