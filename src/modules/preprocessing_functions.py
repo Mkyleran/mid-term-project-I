@@ -107,7 +107,9 @@ def process_nan_values(df, features_to_zero = [], features_to_remove = [], featu
     """
     Returns a pandas DataFrame with the NaN values replaced or removed.
     """
-   
+    
+    df.reset_index(drop = True, inplace = True)
+    
     for feature in features_to_zero:
         zero_column = df[feature].fillna(0)
         df[feature] = zero_column
@@ -155,6 +157,8 @@ def datetime_binning(df, bin_set = {}):
             'w' = week
             'm' = month
     """
+    
+    df.reset_index(drop = True, inplace = True)
     
     if not set(bin_set).issubset({'h', 'd', 'wd', 'w', 'm'}):
         raise ValueError("bin_set must be any of 'd', 'w', or 'm'")
@@ -272,6 +276,7 @@ def is_stat_holiday(df):
         '2020-1-1'
     ]
     
+    df.reset_index(drop = True, inplace = True)
     df['stat_holiday'] = 0
     
     for i in range(df.shape[0]):
