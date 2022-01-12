@@ -137,3 +137,84 @@ def process_nan_values(df, features_to_zero = [], features_to_remove = [], featu
             df[feature] = median_column
     
     return df.reset_index(drop = True)
+
+
+def datetime_binning(df, bin_size = {}):
+    """
+    Returns a pandas DataFrame with an additional column(s) of the flight dates binned by departure hour, day, week, and/or month of the year.
+    
+    Parameters
+    ----------
+    df: pandas DataFrame
+    
+    bin_size: str
+        Must be any of:
+            'h' = hour
+            'd' = day
+            'w' = week
+            'm' = month
+    """
+    
+    if not set(bin_size).issubset({'h', 'd', 'w', 'm'}):
+        raise ValueError("bin_size must be any of 'd', 'w', or 'm'")
+        
+    if 'h' in bin_size:
+        df['dep_hour'] = df['crs_dep_time']//100       
+    
+    if 'd' in bin_size:
+        df['day_of_year'] = 0
+        for i in range(df.shape[0]):
+            try:
+                data.loc[i, 'day_of_year'] = pd.to_datetime(data.loc[i, 'fl_date'], utc=True, unit='ms').day_of_year
+            except ValueError:
+                data.loc[i, 'day_of_year'] = pd.to_datetime(data.loc[i, 'fl_date']).day_of_year
+    
+    if 'w' in bin_size:
+        df['week_of_year'] = 0
+        for i in range(df.shape[0]):
+            try:
+                data.loc[i, 'week_of_year'] = pd.to_datetime(data.loc[i, 'fl_date'], utc=True, unit='ms').weekofyear
+            except ValueError:
+                data.loc[i, 'week_of_year'] = pd.to_datetime(data.loc[i, 'fl_date']).weekofyear
+    
+    if 'm' in bin_size:
+        df['month'] = 0
+        for i in range(df.shape[0]):
+            try:
+                data.loc[i, 'month'] = pd.to_datetime(data.loc[i, 'fl_date'], utc=True, unit='ms').month
+            except ValueError:
+                data.loc[i, 'month'] = pd.to_datetime(data.loc[i, 'fl_date']).month
+        
+    return df
+
+
+def is_stat_holiday(df):
+    """
+    Returns a pandas DataFrame with an additional column of the flight dates binned by departure hour, day, week, and/or month of the year. 
+    """
+    
+    list_of_stat_holidays = [
+        '2019-1-1',
+        '2019-1-21',
+        '2019-2-18',
+        '2019-5-27',
+        '2019-7-4',
+        '2019-9-2',
+        '2019-10-14',
+        '2019-11-11',
+        '2019-11-28',
+        '2019-12-25',
+        '2020-1-1'
+    ]
+    
+    df['stat_holiday'] = 0
+    
+    for i in range(df.shape[0]):
+        try:
+            timestamp = pd.to_datetime(df.loc[i, 'fl_date'], utc=True, unit='ms')
+            df.loc[i, 'stat_holiday'] = int(f"{timestamp.year}-{timestamp.month}-{timestamp.day}" in list_of_stat_holidays)
+        except ValueError:
+            timestamp = pd.to_datetime(df.loc[i, 'fl_date'])
+            df.loc[i, 'stat_holiday'] = int(f"{timestamp.year}-{timestamp.month}-{timestamp.day}" in list_of_stat_holidays)
+        
+    return df
