@@ -139,37 +139,46 @@ def process_nan_values(df, features_to_zero = [], features_to_remove = [], featu
     return df.reset_index(drop = True)
 
 
-def datetime_binning(df, bin_size = {}):
+def datetime_binning(df, bin_set = {}):
     """
-    Returns a pandas DataFrame with an additional column(s) of the flight dates binned by departure hour, day, week, and/or month of the year.
+    Returns a pandas DataFrame with an additional column(s) of the flight dates binned by departure hour, day, weekday, week, and/or month of the year.
     
     Parameters
     ----------
     df: pandas DataFrame
     
-    bin_size: str
-        Must be any of:
+    bin_set: iterable
+        Must be any combination of:
             'h' = hour
             'd' = day
+            'wd' = weekday
             'w' = week
             'm' = month
     """
     
-    if not set(bin_size).issubset({'h', 'd', 'w', 'm'}):
-        raise ValueError("bin_size must be any of 'd', 'w', or 'm'")
+    if not set(bin_set).issubset({'h', 'd', 'wd', 'w', 'm'}):
+        raise ValueError("bin_set must be any of 'd', 'w', or 'm'")
         
-    if 'h' in bin_size:
+    if 'h' in bin_set:
         df['dep_hour'] = df['crs_dep_time']//100       
     
-    if 'd' in bin_size:
+    if 'd' in bin_set:
         df['day_of_year'] = 0
         for i in range(df.shape[0]):
             try:
                 data.loc[i, 'day_of_year'] = pd.to_datetime(data.loc[i, 'fl_date'], utc=True, unit='ms').day_of_year
             except ValueError:
                 data.loc[i, 'day_of_year'] = pd.to_datetime(data.loc[i, 'fl_date']).day_of_year
+                
+    if 'wd' in bin_set:
+        df['weekday'] = 0
+        for i in range(df.shape[0]):
+            try:
+                data.loc[i, 'weekday'] = pd.to_datetime(data.loc[i, 'fl_date'], utc=True, unit='ms').day_of_week
+            except ValueError:
+                data.loc[i, 'weekday'] = pd.to_datetime(data.loc[i, 'fl_date']).day_of_week
     
-    if 'w' in bin_size:
+    if 'w' in bin_set:
         df['week_of_year'] = 0
         for i in range(df.shape[0]):
             try:
@@ -177,7 +186,7 @@ def datetime_binning(df, bin_size = {}):
             except ValueError:
                 data.loc[i, 'week_of_year'] = pd.to_datetime(data.loc[i, 'fl_date']).weekofyear
     
-    if 'm' in bin_size:
+    if 'm' in bin_set:
         df['month'] = 0
         for i in range(df.shape[0]):
             try:
@@ -190,20 +199,76 @@ def datetime_binning(df, bin_size = {}):
 
 def is_stat_holiday(df):
     """
-    Returns a pandas DataFrame with an additional column of the flight dates binned by departure hour, day, week, and/or month of the year. 
+    Returns a pandas DataFrame with an additional column of the whether or not the flight is taking place on a holiday. 
     """
     
-    list_of_stat_holidays = [
+    holiday_days_list = [
+        #New Years
         '2019-1-1',
+        
+        #MLK Jr Day
+        '2019-1-18',
+        '2019-1-19',
+        '2019-1-20',
         '2019-1-21',
+        
+        #President's Day
+        '2019-2-15',        
+        '2019-2-16',
+        '2019-2-17',
         '2019-2-18',
+        
+        #Memorial Day
+        '2019-5-24',
+        '2019-5-25',
+        '2019-5-26',
         '2019-5-27',
+        
+        #Independence Day
+        '2019-7-3',
         '2019-7-4',
+        '2019-7-5',
+        '2019-7-6',
+        '2019-7-7',
+        
+        #Labor Day
+        '2019-8-30',
+        '2019-8-31',
+        '2019-9-1',
         '2019-9-2',
+        
+        #Columbus Day
+        '2019-10-11',
+        '2019-10-12',
+        '2019-10-13',
         '2019-10-14',
+        
+        #Veteran's Day
+        '2019-11-8',
+        '2019-11-9',
+        '2019-11-10',
         '2019-11-11',
+        
+        #Thanksgiving
+        '2019-11-25',
+        '2019-11-26',
+        '2019-11-27',
         '2019-11-28',
+        
+        #Christmas
+        '2019-12-21',
+        '2019-12-22',
+        '2019-12-23',
+        '2019-12-24',
         '2019-12-25',
+        '2019-12-26',
+        '2019-12-27',
+        '2019-12-28',
+        '2019-12-29',
+        
+        #New Years
+        '2019-12-30',
+        '2019-12-31',
         '2020-1-1'
     ]
     
@@ -212,9 +277,49 @@ def is_stat_holiday(df):
     for i in range(df.shape[0]):
         try:
             timestamp = pd.to_datetime(df.loc[i, 'fl_date'], utc=True, unit='ms')
-            df.loc[i, 'stat_holiday'] = int(f"{timestamp.year}-{timestamp.month}-{timestamp.day}" in list_of_stat_holidays)
+            df.loc[i, 'stat_holiday'] = int(f"{timestamp.year}-{timestamp.month}-{timestamp.day}" in holiday_days_list)
         except ValueError:
             timestamp = pd.to_datetime(df.loc[i, 'fl_date'])
-            df.loc[i, 'stat_holiday'] = int(f"{timestamp.year}-{timestamp.month}-{timestamp.day}" in list_of_stat_holidays)
+            df.loc[i, 'stat_holiday'] = int(f"{timestamp.year}-{timestamp.month}-{timestamp.day}" in holiday_days_list)
         
     return df
+
+
+def numerical_categorical_split(df):
+    """
+    Returns two pandas DataFrames having segregated the two. First DataFrame is numerical and the second is categorical.
+    """
+    
+    categorical_features_list = [
+        'fl_date',
+        'mkt_unique_carrier',
+        'branded_code_share',
+        'mkt_carrier',
+        'mkt_carrier_fl_num',
+        'op_unique_carrier',
+        'tail_num',
+        'op_carrier_fl_num',
+        'origin_airport_id',
+        'origin',
+        'origin_city_name',
+        'dest_airport_id',
+        'dest',
+        'dest_city_name',
+        'dup',
+        'flights'
+    ]   
+    
+    df_cat_features_list = []
+    for feature in df.columns:
+        if feature in categorical_features_list:
+            df_cat_features_list.append(feature)
+    
+    df_categorical = df[df_cat_features_list]
+    
+    df_numerical_features_list = list(df.columns)
+    for cat_feature in df_cat_features_list:
+        df_numerical_features_list.remove(cat_feature)
+    
+    df_numerical = df[df_numerical_features_list]
+    
+    return df_numerical, df_categorical
