@@ -52,10 +52,10 @@ def flight_test_features(df, purged = False):
         'flights',
         'distance'
     ]
-    
+    df = df[features]
     if purged:
         return purge_features(df)  
-    return df[features]
+    return df
 
 
 def purge_features(df):
