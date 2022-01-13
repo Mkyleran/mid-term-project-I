@@ -163,35 +163,47 @@ def datetime_binning(df, bin_set = {}):
     if not set(bin_set).issubset({'h', 'd', 'wd', 'w', 'm'}):
         raise ValueError("bin_set must be any of 'd', 'wd', 'w', or 'm'")
     
+    fl_date = np.array(df['fl_date'])
+    shape = df.shape[0]
+    
     if 'h' in bin_set:
         df['dep_hour'] = df['crs_dep_time']//100
     if 'd' in bin_set:
-        df['day_of_year'] = 0
+        day_of_year = np.empty(shape = shape)
     if 'wd' in bin_set:
-        df['weekday'] = 0    
+        weekday = np.empty(shape = shape)    
     if 'w' in bin_set:
-        df['week'] = 0
+        week = np.empty(shape = shape)
     if 'm' in bin_set:
-        df['month'] = 0
+        month = np.empty(shape = shape)
     
-    for i in range(df.shape[0]):
+    for i in range(shape):
         try:
-            date_code = pd.to_datetime(df.loc[i, 'fl_date'], utc=True, unit='ms')
+            date_code = pd.to_datetime(fl_date[i], utc=True, unit='ms')
         except ValueError:
-            date_code = pd.to_datetime(df.loc[i, 'fl_date'])   
+            date_code = pd.to_datetime(fl_date[i])   
     
         if 'd' in bin_set:
-            df.loc[i, 'day_of_year'] = date_code.day_of_year
+            day[i] = date_code.day_of_year
             
         if 'wd' in bin_set:
-            df.loc[i, 'weekday'] = date_code.day_of_week
+            weekday[i] = date_code.day_of_week
 
         if 'w' in bin_set:
-            df.loc[i, 'week_of_year'] = date_code.weekofyear
+            week[i] = date_code.weekofyear
 
         if 'm' in bin_set:
-            df.loc[i, 'month'] = date_code.month
-        
+            month[i] = date_code.month
+    
+    if 'd' in bin_set:
+        df['day_of_year'] = day
+    if 'wd' in bin_set:
+        df['weekday'] = weekday
+    if 'w' in bin_set:
+        df['week'] = week
+    if 'm' in bin_set:
+        df['month'] = month
+    
     return df
 
 
