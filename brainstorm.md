@@ -33,3 +33,9 @@ Causes for flight delays
 
  Most flight delay prediction models I am seeing treat it as a classification problem.
 
+# Stats review
+Passengers is data from 2015–2019 aggregated per month
+- departures_scheduled
+  - The number of departures scheduled in a month for a specific route by unique carrier (i.e. the number of times a unique carrier schedules a route in a month)
+  - max = 2361. A carrier scheduled that route to fly 2361 times in that month
+  
