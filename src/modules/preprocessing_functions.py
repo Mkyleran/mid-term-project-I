@@ -371,3 +371,63 @@ def binomial_stats(df, col_list, threshold=0, greater=True):
     stats.rename({col_filt: col_1}, axis=1, inplace=True)
     
     return stats.reset_index()
+
+# Version 2 Doesn't have weekday option
+def datetime_binning_v2(df, bin_set = {}):
+    """
+    Returns a pandas DataFrame with an additional column(s) of the flight dates binned by departure hour, day, weekday, week, and/or month of the year.
+    
+    Parameters
+    ----------
+    df: pandas DataFrame
+    
+    bin_set: iterable
+        Must be any combination of:
+            'h' = hour
+            'd' = day of month
+            'wd' = weekday -> NOT AVAILABLE 
+            'w' = week
+            'm' = month
+    """
+    
+    df.reset_index(drop = True, inplace = True)
+    
+    if not set(bin_set).issubset({'h', 'd', 'w', 'm', 'wd'}):
+        raise ValueError("bin_set must be any of 'wd', 'h', 'd', 'w', or 'm'")
+        
+    if 'h' in bin_set:
+        df['dep_hour'] = df['crs_dep_time']//100       
+    
+    if 'd' in bin_set:
+        df['day_of_month'] = 0
+        for i in range(df.shape[0]):
+            try:
+                df.loc[i, 'day_of_month'] = pd.to_datetime(df.loc[i, 'fl_date'], utc=True, unit='ms').day
+            except ValueError:
+                df.loc[i, 'day_of_month'] = pd.to_datetime(df.loc[i, 'fl_date']).day
+                
+#     if 'wd' in bin_set:
+#         df['weekday'] = 0
+#         for i in range(df.shape[0]):
+#             try:
+#                 df.loc[i, 'weekday'] = pd.to_datetime(df.loc[i, 'fl_date'], utc=True, unit='ms').weekday
+#             except ValueError:
+#                 df.loc[i, 'weekday'] = pd.to_datetime(df.loc[i, 'fl_date']).weekday
+    
+    if 'w' in bin_set:
+        df['week_of_year'] = 0
+        for i in range(df.shape[0]):
+            try:
+                df.loc[i, 'week_of_year'] = pd.to_datetime(df.loc[i, 'fl_date'], utc=True, unit='ms').week
+            except ValueError:
+                df.loc[i, 'week_of_year'] = pd.to_datetime(df.loc[i, 'fl_date']).week
+    
+    if 'm' in bin_set:
+        df['month'] = 0
+        for i in range(df.shape[0]):
+            try:
+                df.loc[i, 'month'] = pd.to_datetime(df.loc[i, 'fl_date'], utc=True, unit='ms').month
+            except ValueError:
+                df.loc[i, 'month'] = pd.to_datetime(df.loc[i, 'fl_date']).month
+        
+    return df
