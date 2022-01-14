@@ -1,6 +1,10 @@
 import pandas as pd
 import numpy as np
 
+def convert_flight_date(df):
+    df['fl_date'] = pd.to_datetime(df['fl_date'], unit='ms')
+    return df
+
 def daily_flight_order(df): 
     """
     Returns the pandas dataframe ordered by [fl_date, tail_num, crs_dep_time] with an added column indicating how many flights that plane has undertaken previously during the same day.   
