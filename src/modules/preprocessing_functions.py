@@ -125,7 +125,7 @@ def process_nan_values(df, features_to_zero = [], features_to_remove = [], featu
             median_column = df[feature].fillna(median)
             df[feature] = median_column
     
-    df = df.iloc[df[features_to_remove].dropna().index]
+    df.dropna(subset=features_to_remove, inplace=True)
     
     if not avg_before_purge:
         for feature in features_to_mean:
