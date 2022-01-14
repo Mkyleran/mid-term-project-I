@@ -23,12 +23,13 @@ def build_weather_table(locations: list, year: int, output_doc_name: str, API_ke
 
     for location in locations:
         
-        response = [None, None]
+        weather_data = [None, None]
         
         for i in range(2):
-            response[i] = historical_weather(city=location['city'], state=location['state'], start_date=dates['start'][i], end_date=dates['end'][i], API_key=API_key)
-        
-        df = pd.concat([pd.DataFrame(response[0]), pd.DataFrame(response[1])])
+            response = historical_weather(city=location['city'], state=location['state'], start_date=dates['start'][i], end_date=dates['end'][i], API_key=API_key)
+            weather_data[i] = response.json()['locations'][f'{location["city"]},{location["state"]},US']['values']
+
+        df = pd.concat([pd.DataFrame(weather_data[0]), pd.DataFrame(weather_data[1])])
         df['city'] = location['city']
         df['state'] = location['state']
         
@@ -40,16 +41,16 @@ def build_weather_table(locations: list, year: int, output_doc_name: str, API_ke
     weather_table.to_csv(output_doc_name)
 
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
     
-    API_key = '<YOUR API KEY GOES HERE>'
-    locations_file_path = '<THE LOCATIONS FILE PATH GOES HERE>'
-    year = <THE YEAR FOR THE DATA YOU WANT TO RECEIVE>
+#     API_key = '<YOUR API KEY GOES HERE>'
+#     locations_file_path = '<THE LOCATIONS FILE PATH GOES HERE>'
+#     year = <THE YEAR FOR THE DATA YOU WANT TO RECEIVE>
 
-    locations_df = pd.read_csv(locations_file_path)
-    locations_df = locations_df.drop('Unnamed: 0', axis =1)
-    locations_list = []
-    for i in range(locations_df.shape[0]):
-        locations_list.append({'city': locations_df.loc[i, 'city'], 'state': locations_df.loc[i, 'state']})
+#     locations_df = pd.read_csv(locations_file_path)
+#     locations_df = locations_df.drop('Unnamed: 0', axis =1)
+#     locations_list = []
+#     for i in range(locations_df.shape[0]):
+#         locations_list.append({'city': locations_df.loc[i, 'city'], 'state': locations_df.loc[i, 'state']})
 
-    build_weather_table(locations=locations_list, year=year, output_doc_name=f'historical_daily_weather_data_{year}.csv', API_key=API_key)
+#     build_weather_table(locations=locations_list, year=year, output_doc_name=f'historical_daily_weather_data_{year}.csv', API_key=API_key)
